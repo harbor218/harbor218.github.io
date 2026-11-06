@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>欧乐影院-欧乐影院在线影视_高清电影电视剧观看</title>
+<meta name="description" content="欧乐影院是一个在线影视观看站点首页，围绕高清电影、热播电视剧与专题片单组织内容，提供清晰的分类导航与搜索入口，方便按类型、地区与年份查找想看的内容。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%2338bdf8' stroke-width='2'/%3E%3Cpath d='M13.5 11.5l7 4.5-7 4.5z' fill='%23f8fafc'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b1120;
+  --bg-soft:#111c31;
+  --card:#152238;
+  --line:rgba(148,163,184,.18);
+  --text:#e7eefb;
+  --muted:#9aaec9;
+  --accent:#38bdf8;
+  --accent-2:#f59e0b;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{width:min(1160px,92%);margin:0 auto}
+
+/* 页头 */
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,17,32,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex;align-items:center;gap:22px;
+  padding:14px 0;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-mark{
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(140deg,#0ea5e9,#1e3a8a);
+  display:grid;place-items:center;
+  box-shadow:0 4px 14px rgba(14,165,233,.35);
+}
+.brand-text{font-size:1.18rem;font-weight:800;letter-spacing:.5px;white-space:nowrap}
+.nav-links{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.nav-links a{font-size:.92rem;color:var(--muted);padding:4px 2px;border-bottom:2px solid transparent;transition:.2s}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--text);border-bottom-color:var(--accent)}
+.nav-search{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.nav-search input{
+  width:150px;padding:7px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--bg-soft);color:var(--text);
+  font-size:.86rem;outline:none;font-family:inherit;
+}
+.nav-search input:focus{border-color:var(--accent)}
+.nav-search button{
+  padding:7px 13px;border-radius:999px;border:none;cursor:pointer;
+  background:var(--accent);color:#04121f;font-weight:700;font-size:.86rem;font-family:inherit;
+}
+.nav-search button:hover{background:#7dd3fc}
+
+/* 首屏 */
+.hero{
+  position:relative;overflow:hidden;
+  padding:58px 0 50px;
+  background:
+    radial-gradient(900px 380px at 82% -8%,rgba(56,189,248,.18),transparent 65%),
+    radial-gradient(700px 340px at 4% 110%,rgba(245,158,11,.10),transparent 60%);
+  border-bottom:1px solid var(--line);
+}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:44px;align-items:center}
+.hero h1{
+  font-size:clamp(1.9rem,4.4vw,3rem);
+  line-height:1.25;font-weight:900;letter-spacing:1px;
+  background:linear-gradient(100deg,#f8fafc 30%,#7dd3fc);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-lead{margin-top:16px;color:var(--muted);font-size:1rem;max-width:34em}
+.hero-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.tag{
+  font-size:.8rem;color:#bae6fd;border:1px solid rgba(56,189,248,.35);
+  background:rgba(56,189,248,.08);border-radius:999px;padding:4px 12px;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 22px;border-radius:999px;font-weight:700;font-size:.94rem;
+  transition:.2s;
+}
+.btn-primary{background:var(--accent);color:#04121f}
+.btn-primary:hover{background:#7dd3fc}
+.btn-ghost{border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--accent);color:#bae6fd}
+.hero-art{
+  border-radius:20px;border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(21,34,56,.95),rgba(11,17,32,.9));
+  padding:18px;box-shadow:0 24px 60px -30px rgba(0,0,0,.9);
+}
+.hero-art figcaption{margin-top:12px;font-size:.8rem;color:var(--muted);text-align:center}
+
+/* 通用区块 */
+section.block{padding:52px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:26px}
+.sec-head h2{font-size:1.4rem;font-weight:800;letter-spacing:.5px;position:relative;padding-left:14px}
+.sec-head h2::before{
+  content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:4px;height:20px;border-radius:3px;background:linear-gradient(#38bdf8,#f59e0b);
+}
+.sec-head p{color:var(--muted);font-size:.9rem;max-width:46em}
+
+/* 分类网格 */
+.grid-cat{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px}
+.cat-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 16px;transition:.22s;
+}
+.cat-card:hover{transform:translateY(-3px);border-color:rgba(56,189,248,.5)}
+.cat-icon{width:32px;height:32px;margin-bottom:10px}
+.cat-card h3{font-size:1rem;font-weight:700;margin-bottom:4px}
+.cat-card p{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+/* 片单 */
+.grid-film{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.film{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;display:flex;flex-direction:column;transition:.22s;
+}
+.film:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.45)}
+.poster{aspect-ratio:16/9;background:linear-gradient(135deg,#1e293b,#0f172a);position:relative;display:grid;place-items:center}
+.poster svg{width:44px;height:44px;opacity:.85}
+.poster .badge{
+  position:absolute;top:10px;left:10px;font-size:.72rem;
+  background:rgba(56,189,248,.18);color:#bae6fd;border:1px solid rgba(56,189,248,.4);
+  border-radius:6px;padding:2px 8px;
+}
+.film-body{padding:14px 16px 18px}
+.film-body h3{font-size:1rem;font-weight:700;margin-bottom:6px}
+.film-body p{font-size:.83rem;color:var(--muted);line-height:1.65}
+.film-meta{display:flex;gap:10px;margin-top:10px;font-size:.76rem;color:#7f96b4}
+
+/* 搜索筛选面板 */
+.panel{
+  background:linear-gradient(160deg,rgba(21,34,56,.9),rgba(11,17,32,.75));
+  border:1px solid var(--line);border-radius:18px;padding:26px;
+}
+.filter-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.chip{
+  font-size:.84rem;padding:6px 15px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:var(--muted);
+  font-family:inherit;transition:.18s;
+}
+.chip:hover{color:var(--text);border-color:rgba(56,189,248,.5)}
+.chip.active{background:var(--accent);color:#04121f;border-color:var(--accent);font-weight:700}
+.search-big{display:flex;gap:10px;flex-wrap:wrap}
+.search-big input{
+  flex:1 1 240px;padding:12px 18px;border-radius:12px;font-size:.95rem;
+  border:1px solid var(--line);background:#0e1929;color:var(--text);outline:none;font-family:inherit;
+}
+.search-big input:focus{border-color:var(--accent)}
+.search-big button{
+  padding:12px 26px;border-radius:12px;border:none;cursor:pointer;
+  background:var(--accent);color:#04121f;font-weight:800;font-size:.95rem;font-family:inherit;
+}
+.search-big button:hover{background:#7dd3fc}
+.result-note{margin-top:14px;font-size:.86rem;color:var(--muted);min-height:1.4em}
+.result-note strong{color:#bae6fd}
+
+/* 正文双栏 */
+.two-col{display:grid;grid-template-columns:1.4fr .6fr;gap:36px;align-items:start}
+.article h3{font-size:1.05rem;font-weight:800;margin:22px 0 8px}
+.article h3:first-child{margin-top:0}
+.article p{color:#c3d3e8;font-size:.94rem;margin-bottom:10px}
+.aside{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:20px;
+}
+.aside h4{font-size:.95rem;font-weight:800;margin-bottom:12px;color:#bae6fd}
+.aside ul{list-style:none;display:grid;gap:10px}
+.aside li{font-size:.86rem;color:var(--muted);line-height:1.6;padding-left:16px;position:relative}
+.aside li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+.aside .dl{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:18px;padding:11px;border-radius:10px;
+  background:rgba(56,189,248,.14);color:#bae6fd;font-weight:700;font-size:.9rem;
+  pointer-events:none;opacity:.85;cursor:default;
+}
+
+/* 常见问答 */
+.faq{display:grid;gap:12px}
+.faq details{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;
+}
+.faq summary{cursor:pointer;font-weight:700;font-size:.95rem;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--accent);font-weight:800}
+.faq details[open] summary::after{content:"–"}
+.faq p{margin-top:10px;font-size:.88rem;color:var(--muted);line-height:1.7}
+
+/* 页尾 */
+footer.site{
+  padding:34px 0 26px;background:#080e1a;border-top:1px solid var(--line);
+}
+.foot-top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.foot-brand{display:flex;align-items:center;gap:10px}
+.foot-brand .brand-text{font-size:1rem}
+.foot-desc{color:var(--muted);font-size:.84rem;max-width:34em;margin-top:10px;line-height:1.7}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap;font-size:.86rem;color:var(--muted)}
+.foot-links a:hover{color:var(--accent)}
+.copyright{
+  margin-top:26px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:.8rem;color:#6d829e;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
+
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-art{order:-1;max-width:440px;margin:0 auto;width:100%}
+  .two-col{grid-template-columns:1fr}
+  .nav{flex-wrap:wrap;gap:12px}
+  .nav-links{order:3;width:100%;margin-left:0;gap:14px;font-size:.9rem}
+  .nav-search{margin-left:auto}
+  .nav-search input{width:118px}
+}
+@media(max-width:520px){
+  section.block{padding:38px 0}
+  .hero{padding:38px 0 34px}
+  .search-big button{flex:1 1 100%}
+  .brand-text{font-size:1.05rem}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="欧乐影院首页">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="8.2" stroke="#f8fafc" stroke-width="1.8"/>
+          <path d="M10 8.6l5.4 3.4L10 15.4z" fill="#f8fafc"/>
+        </svg>
+      </span>
+      <span class="brand-text">欧乐影院</span>
+    </a>
+    <nav class="nav-links" aria-label="主导航">
+      <a href="#categories">影视分类</a>
+      <a href="#picks">本周片单</a>
+      <a href="#search">找片搜索</a>
+      <a href="#about">关于本站</a>
+      <a href="#faq">常见疑问</a>
+    </nav>
+    <form class="nav-search" role="search" onsubmit="return quickSearch(event)">
+      <input type="search" id="navInput" placeholder="搜索片名" aria-label="搜索片名">
+      <button type="submit">搜索</button>
+    </form>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>欧乐影院</h1>
+        <p class="hero-lead">欧乐影院把在线影视内容按类型、地区与年份重新归类，电影、电视剧、动漫与纪录片各归其位，打开首页就能顺着分类和片单找到下一部想看的内容。</p>
+        <div class="hero-tags">
+          <span class="tag">高清电影</span>
+          <span class="tag">热播电视剧</span>
+          <span class="tag">动漫番剧</span>
+          <span class="tag">纪录片</span>
+          <span class="tag">按年份筛选</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#search">开始找片</a>
+          <a class="btn btn-ghost" href="#picks">浏览本周片单</a>
+        </div>
+      </div>
+      <figure class="hero-art">
+        <svg viewBox="0 0 320 200" role="img" aria-label="影院银幕与播放图标插画">
+          <defs>
+            <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1e3a8a"/>
+              <stop offset="1" stop-color="#0b1120"/>
+            </linearGradient>
+            <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#38bdf8" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <rect x="14" y="12" width="292" height="150" rx="14" fill="url(#screen)" stroke="#38bdf8" stroke-opacity=".35"/>
+          <path d="M64 162l96-96 96 96z" fill="url(#beam)" opacity=".35"/>
+          <circle cx="160" cy="84" r="34" fill="none" stroke="#7dd3fc" stroke-width="2" stroke-dasharray="4 6"/>
+          <path d="M150 68l26 16-26 16z" fill="#f8fafc"/>
+          <rect x="46" y="130" width="70" height="8" rx="4" fill="#38bdf8" opacity=".5"/>
+          <rect x="46" y="144" width="44" height="8" rx="4" fill="#f59e0b" opacity=".45"/>
+          <rect x="204" y="130" width="70" height="8" rx="4" fill="#38bdf8" opacity=".5"/>
+          <rect x="230" y="144" width="44" height="8" rx="4" fill="#f59e0b" opacity=".45"/>
+          <rect x="14" y="172" width="292" height="12" rx="6" fill="#152238" stroke="#38bdf8" stroke-opacity=".2"/>
+        </svg>
+        <figcaption>银幕、片单与分类，构成欧乐影院的浏览起点</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 分类 -->
+  <section class="block" id="categories">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>影视分类导航</h2>
+        <p>欧乐影院把内容按题材切成清晰的入口，先定方向再挑具体作品，比一页页翻找更省时间。</p>
+      </div>
+      <div class="grid-cat">
+        <article class="cat-card">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M8 6v12"/></svg>
+          <h3>电影长片</h3>
+          <p>剧情、动作、科幻与喜剧等类型长片，可按地区与上映年份缩小范围。</p>
+        </article>
+        <article class="cat-card">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.7"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 4v16M4 9h5"/></svg>
+          <h3>电视剧集</h3>
+          <p>国产剧、美剧、日韩剧分栏呈现，支持按更新状态与集数查看。</p>
+        </article>
+        <article class="cat-card">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M9 10h.01M15 10h.01M9.5 15c1.5 1.2 3.5 1.2 5 0"/></svg>
+          <h3>动漫番剧</h3>
+          <p>连载番剧与剧场版分开放置，标注连载年份与季数，便于追更。</p>
+        </article>
+        <article class="cat-card">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.7"><path d="M4 18V8l8-4 8 4v10"/><path d="M4 18h16"/></svg>
+          <h3>纪录片场</h3>
+          <p>自然、历史与人文纪实内容集中展示，适合按主题连续观看。</p>
+        </article>
+        <article class="cat-card">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.7"><path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.8 6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></svg>
+          <h3>高分精选</h3>
+          <p>按口碑与讨论热度整理的精选合集，作为不确定看什么时的备选。</p>
+        </article>
+        <article class="cat-card">
+          <svg class="cat-icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
+          <h3>最近更新</h3>
+          <p>新上线与近期补充的内容按时间排列，方便回头查看遗漏的作品。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 片单 -->
+  <section class="block" id="picks">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>本周片单推荐</h2>
+        <p>片单以类型和观看场景分组，欧乐影院在每个条目下标注基本信息，帮助判断是否值得排进自己的观看列表。</p>
+      </div>
+      <div class="grid-film">
+        <article class="film">
+          <div class="poster"><span class="badge">剧情</span><svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M10 10l4 2-4 2z"/></svg></div>
+          <div class="film-body">
+            <h3>城市夜行线</h3>
+            <p>以夜间都市为背景的剧情长片，节奏偏慢，适合安静时段观看。</p>
+            <div class="film-meta"><span>电影</span><span>剧情</span><span>2024</span></div>
+          </div>
+        </article>
+        <article class="film">
+          <div class="poster"><span class="badge">科幻</span><svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="9" ry="3.6" transform="rotate(-20 12 12)"/></svg></div>
+          <div class="film-body">
+            <h3>轨道之外</h3>
+            <p>太空题材科幻作品，视觉设计是主要看点，适合大屏观看。</p>
+            <div class="film-meta"><span>电影</span><span>科幻</span><span>2023</span></div>
+          </div>
+        </article>
+        <article class="film">
+          <div class="poster"><span class="badge">剧集</span><svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M8 11h8M8 14h5"/></svg></div>
+          <div class="film-body">
+            <h3>长街灯火</h3>
+            <p>都市群像剧集，多线叙事，每集围绕一个街区展开。</p>
+            <div class="film-meta"><span>电视剧</span><span>都市</span><span>连载中</span></div>
+          </div>
+        </article>
+        <article class="film">
+          <div class="poster"><span class="badge">动漫</span><svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6"><path d="M12 4l7 4v8l-7 4-7-4V8z"/><path d="M12 4v16"/></svg></div>
+          <div class="film-body">
+            <h3>风起时</h3>
+            <p>连载番剧，画风清爽，故事围绕小镇少年与季节更替展开。</p>
+            <div class="film-meta"><span>动漫</span><span>连载</span><span>第2季</span></div>
+          </div>
+        </article>
+        <article class="film">
+          <div class="poster"><span class="badge">纪录</span><svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6"><path d="M4 17V9l8-4 8 4v8"/><circle cx="12" cy="12" r="2.4"/></svg></div>
+          <div class="film-body">
+            <h3>海岸线手记</h3>
+            <p>自然纪录片，记录沿海生态与四季变化，叙事平稳。</p>
+            <div class="film-meta"><span>纪录片</span><span>自然</span><span>2024</span></div>
+          </div>
+        </article>
+        <article class="film">
+          <div class="poster"><span class="badge">喜剧</span><svg viewBox="0 0 24 24" fill="none" stroke="#7dd3fc" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M9 10h.01M15 10h.01M8.5 14c1.6 1.8 5.4 1.8 7 0"/></svg></div>
+          <div class="film-body">
+            <h3>周五不加班</h3>
+            <p>轻喜剧短剧，单集时长友好，适合通勤或碎片时间。</p>
+            <div class="film-meta"><span>电视剧</span><span>喜剧</span><span>完结</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 搜索筛选 -->
+  <section class="block" id="search">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>按条件找片</h2>
+        <p>先选类型、再定地区与年份，最后输入片名关键词。欧乐影院的搜索面板把常用筛选条件放在同一行，减少来回跳转。</p>
+      </div>
+      <div class="panel">
+        <div class="filter-row" id="typeRow" role="group" aria-label="类型筛选">
+          <button class="chip active" type="button" data-type="全部">全部</button>
+          <button class="chip" type="button" data-type="电影">电影</button>
+          <button class="chip" type="button" data-type="电视剧">电视剧</button>
+          <button class="chip" type="button" data-type="动漫">动漫</button>
+          <button class="chip" type="button" data-type="纪录片">纪录片</button>
+        </div>
+        <form class="search-big" onsubmit="return bigSearch(event)">
+          <input type="search" id="bigInput" placeholder="输入片名，例如：城市夜行线" aria-label="输入片名关键词">
+          <button type="submit">搜索片单</button>
+        </form>
+        <p class="result-note" id="resultNote" aria-live="polite">当前类型：<strong>全部</strong>。输入关键词后会在本周片单范围内匹配片名与简介。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 正文说明 -->
+  <section class="block" id="about">
+    <div class="wrap two-col">
+      <div class="article">
+        <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:18px;padding-left:14px;position:relative;">
+          欧乐影院的使用方式与内容组织
+        </h2>
+        <h3>从哪里开始看</h3>
+        <p>初次来到欧乐影院，最直接的路径是从分类导航进入。电影、电视剧、动漫与纪录片四个大类各自独立，选好大类后再按地区或年份细分，能显著缩短挑选时间。如果只是想随便看看，本周片单与高分精选会更合适。</p>
+        <h3>片单信息的阅读方法</h3>
+        <p>每个条目下方标注了内容形态、题材与年份或更新状态。这些信息用于判断作品是否适合当下观看，比如短剧适合碎片时间，长片则需要完整时段。欧乐影院不在条目里堆叠过多描述，保持信息密度适中。</p>
+        <h3>搜索与筛选的配合</h3>
+        <p>记得大致片名时用搜索，只记得类型和年份时用筛选。两个入口共用同一份片单数据，结果保持一致。欧乐影院的搜索不区分大小写，输入部分片名即可命中。</p>
+        <h3>内容更新与浏览顺序</h3>
+        <p>最近更新栏目按补充时间排列，适合在固定时间回访时查看。欧乐影院建议的浏览顺序是先看更新，再进片单，最后按分类深挖，这样不容易在大量条目中迷失方向。</p>
+      </div>
+      <aside class="aside">
+        <h4>快速提示</h4>
+        <ul>
+          <li>分类页支持按地区与年份二次筛选。</li>
+          <li>片单条目会标注是否完结，追更前先确认。</li>
+          <li>搜索支持片名关键词，无需完整名称。</li>
+          <li>纪录片与动漫分栏独立，与剧集不混排。</li>
+        </ul>
+        <a class="dl" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bae6fd" stroke-width="2"><path d="M12 4v10M8 11l4 4 4-4M5 19h14"/></svg>
+          下载
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="block" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>常见疑问</h2>
+        <p>围绕浏览与查找的常见问题，集中说明欧乐影院页面的实际使用方式。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>欧乐影院首页主要提供什么内容？</summary>
+          <p>首页提供影视分类导航、本周片单、按条件找片入口以及内容说明。电影、电视剧、动漫与纪录片分别归类，片单条目附带题材与年份信息。</p>
+        </details>
+        <details>
+          <summary>找不到具体片名怎么办？</summary>
+          <p>先在搜索框输入记得的部分片名，系统会在片名与简介中匹配。若仍无结果，可回到分类导航，按类型与年份逐层缩小范围。</p>
+        </details>
+        <details>
+          <summary>片单里的年份与更新状态准确吗？</summary>
+          <p>条目信息以页面当前展示为准，用于辅助判断是否适合观看。连载中的剧集与番剧会标注更新状态，完结作品单独注明。</p>
+        </details>
+        <details>
+          <summary>筛选条件可以组合使用吗？</summary>
+          <p>可以。类型、地区与年份三个条件支持叠加，组合后结果范围更小，适合已经明确观看方向的访问者。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="8.2" stroke="#f8fafc" stroke-width="1.8"/>
+              <path d="M10 8.6l5.4 3.4L10 15.4z" fill="#f8fafc"/>
+            </svg>
+          </span>
+          <span class="brand-text">欧乐影院</span>
+        </div>
+        <p class="foot-desc">欧乐影院以分类导航与片单推荐组织在线影视内容，帮助访问者按类型、地区与年份快速定位想看的内容。</p>
+      </div>
+      <nav class="foot-links" aria-label="页尾导航">
+        <a href="#categories">影视分类</a>
+        <a href="#picks">本周片单</a>
+        <a href="#search">找片搜索</a>
+        <a href="#about">关于本站</a>
+        <a href="#faq">常见疑问</a>
+      </nav>
+    </div>
+    <div class="copyright">
+      <span>© 欧乐影院 · 内容信息以页面展示为准</span>
+      <span>电影 · 电视剧 · 动漫 · 纪录片</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var currentType = '全部';
+  var typeRow = document.getElementById('typeRow');
+  var note = document.getElementById('resultNote');
+
+  function setType(t){
+    currentType = t;
+    note.innerHTML = '当前类型：<strong>' + t + '</strong>。输入关键词后会在本周片单范围内匹配片名与简介。';
+  }
+
+  typeRow.addEventListener('click', function(e){
+    var btn = e.target.closest('.chip');
+    if(!btn) return;
+    Array.prototype.forEach.call(typeRow.querySelectorAll('.chip'), function(c){ c.classList.remove('active'); });
+    btn.classList.add('active');
+    setType(btn.dataset.type);
+  });
+
+  function collectFilms(){
+    return Array.prototype.map.call(document.querySelectorAll('.film'), function(f){
+      var meta = Array.prototype.map.call(f.querySelectorAll('.film-meta span'), function(s){ return s.textContent.trim(); });
+      return {
+        el: f,
+        title: f.querySelector('h3').textContent.trim(),
+        desc: f.querySelector('p').textContent.trim(),
+        metas: meta
+      };
+    });
+  }
+
+  function runFilter(keyword){
+    var kw = (keyword || '').trim().toLowerCase();
+    var films = collectFilms();
+    var hit = 0;
+    films.forEach(function(f){
+      var typeOk = (currentType === '全部') || f.metas.indexOf(currentType) !== -1;
+      var kwOk = !kw || f.title.toLowerCase().indexOf(kw) !== -1 || f.desc.toLowerCase().indexOf(kw) !== -1;
+      var show = typeOk && kwOk;
+      f.el.style.display = show ? '' : 'none';
+      if(show) hit++;
+    });
+    var msg = '当前类型：<strong>' + currentType + '</strong>';
+    if(kw){ msg += '，关键词：<strong>' + keyword.trim() + '</strong>'; }
+    msg += '，匹配到 <strong>' + hit + '</strong> 部片单内容。';
+    note.innerHTML = msg;
+  }
+
+  window.quickSearch = function(e){
+    e.preventDefault();
+    var v = document.getElementById('navInput').value;
+    document.getElementById('bigInput').value = v;
+    document.getElementById('search').scrollIntoView({behavior:'smooth', block:'start'});
+    runFilter(v);
+    return false;
+  };
+
+  window.bigSearch = function(e){
+    e.preventDefault();
+    runFilter(document.getElementById('bigInput').value);
+    return false;
+  };
+})();
+</script>
+</body>
+                               </html>
